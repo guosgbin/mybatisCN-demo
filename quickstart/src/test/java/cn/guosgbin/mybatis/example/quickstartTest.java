@@ -3,6 +3,7 @@ package cn.guosgbin.mybatis.example;
 import cn.guosgbin.mybatis.example.entity.User;
 import cn.guosgbin.mybatis.example.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -23,6 +24,7 @@ public class quickstartTest {
         SqlSessionFactory factory = builder.build(is);
         //4. 使用工厂对象factory，生产一个SqlSession对象
         SqlSession session = factory.openSession();
+//        SqlSession session = factory.openSession(ExecutorType.BATCH);
         //5. 使用SqlSession对象，获取映射器UserDao接口的代理对象
         UserMapper dao = session.getMapper(UserMapper.class);
         //6. 调用UserDao代理对象的方法，查询所有用户

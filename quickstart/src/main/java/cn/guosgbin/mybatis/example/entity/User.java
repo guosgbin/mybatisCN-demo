@@ -1,8 +1,11 @@
 package cn.guosgbin.mybatis.example.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 5954602998605246077L;
+
     private int id;
     private String name;
     private int age;
