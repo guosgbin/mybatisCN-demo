@@ -17,26 +17,24 @@
         SELECT * FROM tb_user WHERE id = #{id}
     </select>
 
+    <select id="selectByCondition01" parameterType="cn.guosgbin.mybatis.example.entity.User"
+            resultType="cn.guosgbin.mybatis.example.entity.User">
+        SELECT * FROM tb_user
+        <where>
+            <if test="user.name != null and user.name !=''">
+                AND name = #{user.name}
+            </if>
+            <if test="user.age != null">
+                AND age = #{user.age}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByCondition02" parameterType="String" resultType="cn.guosgbin.mybatis.example.entity.User">
+        SELECT * FROM tb_user WHERE name = '${name}'
+    </select>
+
     <update id="updateNameById">
         UPDATE tb_user SET name = #{name} WHERE id = #{id}
     </update>
-
-    <select id="updateNameById11"
-        parameterMap=""
-        parameterType=""
-        resultType=""
-        resultMap=""
-        flushCache="true"
-        useCache="true"
-        timeout=""
-        fetchSize=""
-        statementType="CALLABLE"
-        resultSetType=""
-        databaseId=""
-        resultOrdered="true"
-            resultSets=""
-
-    >
-        UPDATE tb_user SET name = #{name} WHERE id = #{id}
-    </select>
 </mapper>

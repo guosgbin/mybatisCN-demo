@@ -6,21 +6,21 @@ import java.time.LocalDate;
 public class User implements Serializable {
     private static final long serialVersionUID = 5954602998605246077L;
 
-    private int id;
+    private Integer id;
     private String name;
-    private int age;
-    private int sex;
-    private int address;
+    private Integer age;
+    private Integer sex;
+    private Integer address;
 
     private LocalDate birthday;
     private LocalDate createTime;
     private LocalDate updateTime;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -32,27 +32,27 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public int getAddress() {
+    public Integer getAddress() {
         return address;
     }
 
-    public void setAddress(int address) {
+    public void setAddress(Integer address) {
         this.address = address;
     }
 
