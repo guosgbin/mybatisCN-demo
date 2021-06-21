@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace：给哪个接口配置的映射，写接口的全限定类名-->
+<mapper namespace="cn.guosgbin.mybatis.example.mapper.AccountMapper">
+
+    <cache/>
+
+    <!--select标签：表示要执行查询语句； id：给接口里哪个方法配置的，写方法名；resultType：结果集封装类型-->
+    <select id="list" resultType="cn.guosgbin.mybatis.example.entity.User">
+        select * from tb_user
+    </select>
+
+
+</mapper>

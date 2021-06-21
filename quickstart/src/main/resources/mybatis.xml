@@ -10,6 +10,13 @@
         <setting name="cacheEnabled" value="true"></setting>
     </settings>
 
+    <plugins>
+        <plugin interceptor="cn.guosgbin.mybatis.example.plugin.SimpleIntercept">
+            <property name="beforeInfo" value="配置的开始参数"/>
+            <property name="afterInfo" value="配置的结束参数"/>
+        </plugin>
+    </plugins>
+
     <!--配置默认的数据库环境-->
     <environments default="dev">
         <!--定义一个数据库连接环境-->
@@ -19,14 +26,16 @@
             <!--设置数据源，POOLED，UNPOOLED，JNDI，我们使用POOLED-->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://8.129.224.250:3306/mybatis_example"/>
+                <property name="url" value="jdbc:mysql://8.129.224.250:3306/mybatis_example?useSSL=false"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root@123"/>
             </dataSource>
         </environment>
     </environments>
+
     <!-- 映射文件的位置 -->
     <mappers>
         <package name="cn.guosgbin.mybatis.example.mapper"/>
     </mappers>
+
 </configuration>

@@ -22,7 +22,7 @@ public interface UserMapper {
      * @param user
      * @return
      */
-    User selectByCondition01(@Param("user") User user);
+    User selectByCondition01(/*@Param("user")*/ User user);
 
     /**
      * 测试 ${}
@@ -35,4 +35,6 @@ public interface UserMapper {
      * 根据ID修改名字
      */
     int updateNameById(@Param("id") Integer id, @Param("name") String name);
+
+    List<User> selectUserByIds(List<Integer> ids);
 }

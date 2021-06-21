@@ -24,6 +24,7 @@ import java.io.InputStream;
 public class FirstCacheTest {
 
     private SqlSession session;
+    private SqlSession session2;
     private SqlSessionFactory factory;
 
     @Before
@@ -36,6 +37,7 @@ public class FirstCacheTest {
         factory = builder.build(is);
         //4. 使用工厂对象factory，生产一个SqlSession对象
         session = factory.openSession();
+        session2 = factory.openSession();
     }
 
     /**
@@ -46,14 +48,48 @@ public class FirstCacheTest {
      */
     @Test
     public void test1() {
+        // 第一个SqlSession得到的Mapper查询两次
         UserMapper mapper = session.getMapper(UserMapper.class);
         User user = mapper.selectById(1);
+        User user1 = mapper.selectById(1);
+        // 第一个SqlSession得到的Mapper查询一次
+        UserMapper mapper2 = session2.getMapper(UserMapper.class);
+        User user2 = mapper2.selectById(1);
 
-//        Object o = session.selectOne("cn.guosgbin.mybatis.example.mapper.UserMapper.selectById", 1);
-        RowBounds rowBounds = new RowBounds(0, 10);
-        Object o = session.selectList("cn.guosgbin.mybatis.example.mapper.UserMapper.selectById", 1, rowBounds);
-        System.out.println(user == o);
+        System.out.println(user == user1);
+        System.out.println(user == user2);
     }
+
+
+    /**
+     * 测试分页
+     */
+    @Test
+    public void test2() {
+        Object o1 = session.selectList("cn.guosgbin.mybatis.example.mapper.UserMapper.selectById", 1);
+        Object o2 = session.selectList("cn.guosgbin.mybatis.example.mapper.UserMapper.selectById", 1);
+        RowBounds rowBounds = new RowBounds(5, 10);
+        Object o3 = session.selectList("cn.guosgbin.mybatis.example.mapper.UserMapper.selectById", 1, rowBounds);
+        System.out.println(o1 == o2);
+        System.out.println(o1 == o3);
+    }
+
+    /**
+     * 手动清空缓存
+     */
+    @Test
+    public void test3() {
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        User user = mapper.selectById(1);
+        User user1 = mapper.selectById(1);
+
+        session.clearCache();
+
+        User user2 = mapper.selectById(1);
+        System.out.println(user == user1); // true
+        System.out.println(user == user2); // fasle
+    }
+
 
     /**
      * 一级命中的情况
@@ -63,7 +99,7 @@ public class FirstCacheTest {
      * 4.没有关闭一级缓存  关闭一级缓存方法STATEMENT  但是并不是全部关闭一级缓存啊，一级缓存还会存在于 嵌套查询中（子查询）
      */
     @Test
-    public void test2() {
+    public void test100() {
         UserMapper mapper = session.getMapper(UserMapper.class);
         User user = mapper.selectById(1);
 
